@@ -1,0 +1,17 @@
+/* Ordem = ordem de cascata do protótipo. Mexer na ordem muda a especificidade efetiva. */
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/700.css";
+
+@import "./tokens.css";
+@import "./base.css";
+@import "./collage.css";
+@import "./vitrine.css";
+@import "./timeline.css";
+@import "./clientes.css";
+@import "./skills.css";
+@import "./faixas.css";
+@import "./ai.css";
+@import "./responsive.css";
+@import "./motion.css";
+@import "./ai-motion.css";

@@ -1,0 +1,37 @@
+/* Tokens do portfólio (portados da B6 do Design). Bordas rasgadas são recortes estáticos (clip-path), sem filtro SVG de ruído.
+   Cada projeto passa um por vez, como um monte de recortes colados, com um papel ao lado dizendo o que eu fiz.
+   Paleta:
+   creme   #F3EFE6  a mesa
+   creme2  #EAE4D7  trilhos e fitas neutras
+   papel   #FFFDF8  margem branca dos recortes, bilhetes e fichas
+   recibo  #FBF7EE  papel térmico
+   kraft   #C9AB80  papel pardo; em cima dele só tinta (8,6:1)
+   linha   #E2DBCC  fios
+   tinta   #141210  títulos e texto forte
+   tinta2  #4E4840  texto corrido (7,9:1 no creme, 8,5:1 no recibo)
+   roxo    #5B3F68  o único acento: selos dos números, setas, uma palavra por título, botão do CV, fio do capítulo Quazz
+   lilás   #DCD3E2  só fita washi e fundo de etiqueta de rotuladora, sempre com tinta em cima (12,9:1)
+   Fontes: Bricolage Grotesque em tudo que é texto, inclusive as etiquetas de stack. IBM Plex Mono só no rótulo de seção, no cabeçalho de recibo e no código, nunca abaixo de 13px. */
+:root {
+	--cream: #f3efe6;
+	--cream2: #eae4d7;
+	--paper: #fffdf8;
+	--recibo: #fbf7ee;
+	--kraft: #c9ab80;
+	--line: #e2dbcc;
+	--ink: #141210;
+	--ink2: #4e4840;
+	--rx: #5b3f68;
+	--lil: #dcd3e2;
+	--sombra: drop-shadow(0 1px 1px rgba(20, 18, 16, 0.22))
+		drop-shadow(0 6px 9px rgba(20, 18, 16, 0.12));
+	--sombra2: drop-shadow(0 2px 2px rgba(20, 18, 16, 0.2))
+		drop-shadow(0 16px 18px rgba(20, 18, 16, 0.16));
+	/* movimento: um jeito só de entrar (ease-out forte) e uma duração para a dobra do papel */
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+	--dur-collapse: 0.52s;
+	--dur-fold: 0.55s;
+	--mono: "IBM Plex Mono", ui-monospace, monospace;
+	--sans:
+		"Bricolage Grotesque Variable", "Bricolage Grotesque", system-ui, sans-serif;
+}

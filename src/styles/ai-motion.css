@@ -1,0 +1,203 @@
+/* IA: entrada em camadas, depois que a aba abre.
+   Nada aqui muda o tamanho de nada: só translate, scale, rotate e opacity. As propriedades individuais
+   (translate, scale, rotate) se somam ao transform inline dos papéis tortos, então eles assentam na inclinação que já têm.
+   Ordem: texto sobe -> a imagem é colada (cai um pouco maior e torta, assenta) -> a fita pega -> os detalhes pulam. */
+@media (prefers-reduced-motion: no-preference) {
+	@keyframes aiRise {
+		from {
+			opacity: 0;
+			translate: 0 12px;
+		}
+		to {
+			opacity: 1;
+			translate: 0 0;
+		}
+	}
+	@keyframes aiPaste {
+		0% {
+			opacity: 0;
+			translate: 0 -20px;
+			scale: 1.09;
+			rotate: -4deg;
+		}
+		55% {
+			opacity: 1;
+			translate: 0 3px;
+			scale: 0.985;
+			rotate: 0.9deg;
+		}
+		100% {
+			opacity: 1;
+			translate: 0 0;
+			scale: 1;
+			rotate: 0deg;
+		}
+	}
+	@keyframes aiTape {
+		from {
+			opacity: 0;
+			scale: 0.5;
+			rotate: -16deg;
+		}
+		to {
+			opacity: 1;
+			scale: 1;
+			rotate: 0deg;
+		}
+	}
+	@keyframes aiPop {
+		0% {
+			opacity: 0;
+			scale: 0.55;
+		}
+		60% {
+			opacity: 1;
+			scale: 1.12;
+		}
+		100% {
+			opacity: 1;
+			scale: 1;
+		}
+	}
+	@keyframes aiFromLeft {
+		from {
+			opacity: 0;
+			translate: -28px 0;
+		}
+		to {
+			opacity: 1;
+			translate: 0 0;
+		}
+	}
+	@keyframes aiFromRight {
+		from {
+			opacity: 0;
+			translate: 28px 0;
+		}
+		to {
+			opacity: 1;
+			translate: 0 0;
+		}
+	}
+
+	/* blocos do painel, em ordem */
+	.gv.on .gv-c > * {
+		animation: aiRise 0.4s var(--ease-out) both;
+	}
+	.gv.on .gv-c > :nth-child(1) {
+		animation-delay: 0.14s;
+	}
+	.gv.on .gv-c > :nth-child(2) {
+		animation-delay: 0.2s;
+	}
+	.gv.on .gv-c > :nth-child(3) {
+		animation-delay: 0.26s;
+	}
+	.gv.on .gv-c > :nth-child(4) {
+		animation-delay: 0.32s;
+	}
+	.gv.on .gv-c > :nth-child(n + 5) {
+		animation-delay: 0.4s;
+	}
+
+	/* listas: item por item */
+	.gv.on ul.lst li,
+	.gv.on .gv-c .okl li {
+		animation: aiRise 0.35s var(--ease-out) both;
+	}
+	.gv.on ul.lst li:nth-child(1) {
+		animation-delay: 0.42s;
+	}
+	.gv.on ul.lst li:nth-child(2) {
+		animation-delay: 0.5s;
+	}
+	.gv.on ul.lst li:nth-child(3) {
+		animation-delay: 0.58s;
+	}
+	.gv.on ul.lst li:nth-child(n + 4) {
+		animation-delay: 0.66s;
+	}
+
+	/* imagens coladas */
+	.gv.on .gv-f,
+	.gv.on .recibo {
+		animation: aiPaste 0.7s var(--ease-out) 0.5s both;
+	}
+	.gv.on .gv-f .fita {
+		animation: aiTape 0.35s var(--ease-out) 1s both;
+	}
+
+	/* pista do harness */
+	.gv.on .pp {
+		animation: aiRise 0.38s var(--ease-out) both;
+	}
+	.gv.on .pp:nth-child(1) {
+		animation-delay: 0.4s;
+	}
+	.gv.on .pp:nth-child(2) {
+		animation-delay: 0.48s;
+	}
+	.gv.on .pp:nth-child(3) {
+		animation-delay: 0.56s;
+	}
+	.gv.on .pp:nth-child(4) {
+		animation-delay: 0.64s;
+	}
+	.gv.on .pp:nth-child(5) {
+		animation-delay: 0.72s;
+	}
+	.gv.on .pp .gate {
+		animation: aiPop 0.45s var(--ease-out) 0.95s both;
+	}
+
+	/* benchmark */
+	.gv.on .sg .stat {
+		animation: aiPop 0.4s var(--ease-out) both;
+	}
+	.gv.on .sg .stat:nth-child(1) {
+		animation-delay: 0.6s;
+	}
+	.gv.on .sg .stat:nth-child(2) {
+		animation-delay: 0.68s;
+	}
+	.gv.on .sg .stat:nth-child(3) {
+		animation-delay: 0.76s;
+	}
+	.gv.on .sg .stat:nth-child(4) {
+		animation-delay: 0.84s;
+	}
+
+	/* esquema de autoria: o dele vem da esquerda, o seu da direita */
+	.gv.on .bub {
+		animation: aiFromLeft 0.45s var(--ease-out) 0.6s both;
+	}
+	.gv.on .bub.me {
+		animation: aiFromRight 0.45s var(--ease-out) 0.8s both;
+	}
+
+	/* red-team: sete quadrados, o sétimo por último e com mais força */
+	.gv.on .rtl i {
+		animation: aiPop 0.4s var(--ease-out) both;
+	}
+	.gv.on .rtl li:nth-child(1) i {
+		animation-delay: 0.45s;
+	}
+	.gv.on .rtl li:nth-child(2) i {
+		animation-delay: 0.51s;
+	}
+	.gv.on .rtl li:nth-child(3) i {
+		animation-delay: 0.57s;
+	}
+	.gv.on .rtl li:nth-child(4) i {
+		animation-delay: 0.63s;
+	}
+	.gv.on .rtl li:nth-child(5) i {
+		animation-delay: 0.69s;
+	}
+	.gv.on .rtl li:nth-child(6) i {
+		animation-delay: 0.75s;
+	}
+	.gv.on .rtl li:nth-child(7) i {
+		animation-delay: 0.95s;
+	}
+}
