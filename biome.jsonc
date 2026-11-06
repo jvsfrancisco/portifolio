@@ -1,0 +1,58 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+	"vcs": {
+		"enabled": false,
+		"clientKind": "git",
+		"useIgnoreFile": false
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"includes": [
+			"**/src/**/*",
+			"**/.vscode/**/*",
+			"**/index.html",
+			"**/vite.config.ts",
+			"!**/src/routeTree.gen.ts"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"style": {
+				// CSS portado do protótipo: a ordem da cascata é intencional.
+				"noDescendingSpecificity": "off"
+			},
+			"complexity": {
+				// os overrides de celular precisam vencer estilos inline herdados do protótipo; sai quando o inline virar classe.
+				"noImportantStyles": "off"
+			}
+		}
+	},
+	"overrides": [
+		{
+			// Seção de projetos: a colagem é atalho de mouse (o controle por teclado é o botão da etiqueta) e as faixas
+			// de recortes são regiões roláveis focáveis por teclado, como pede a regra scrollable-region-focusable do axe.
+			"includes": ["**/src/components/sections/projects/**"],
+			"linter": {
+				"rules": {
+					"a11y": {
+						"useKeyWithClickEvents": "off",
+						"useSemanticElements": "off",
+						"noNoninteractiveTabindex": "off"
+					}
+				}
+			}
+		}
+	],
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	}
+}
