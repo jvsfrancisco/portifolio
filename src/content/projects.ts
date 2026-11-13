@@ -253,11 +253,11 @@ export const projects: Project[] = [
 		],
 		links: [
 			{
-				label: "ostraart.chinelos.quazz.com.br",
+				label: "Abrir ostraart.chinelos.quazz.com.br",
 				href: "https://ostraart.chinelos.quazz.com.br",
 			},
 			{
-				label: "ostraart.quazz.com.br",
+				label: "Abrir ostraart.quazz.com.br",
 				href: "https://ostraart.quazz.com.br",
 			},
 		],
