@@ -101,8 +101,7 @@
 	}
 
 	/* listas: item por item */
-	.gv.on ul.lst li,
-	.gv.on .gv-c .okl li {
+	.gv.on ul.lst li {
 		animation: aiRise 0.35s var(--ease-out) both;
 	}
 	.gv.on ul.lst li:nth-child(1) {

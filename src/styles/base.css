@@ -124,18 +124,6 @@ li {
 	border-color: var(--rx);
 	color: var(--paper);
 }
-.navlink {
-	display: inline-flex;
-	align-items: center;
-	min-height: 44px;
-	padding: 0 16px;
-	text-decoration: none;
-	font-weight: 550;
-	color: var(--ink2);
-}
-.navlink:hover {
-	color: var(--ink);
-}
 
 .mesa {
 	overflow-x: clip;

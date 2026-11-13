@@ -1,4 +1,5 @@
 import { contact, cvHref } from "#/content/profile";
+import { QuazzCredit } from "./QuazzCredit";
 
 const dashed = "1.5px dashed rgba(20, 18, 16, 0.35)";
 
@@ -90,6 +91,7 @@ export function SiteFooter() {
 					</a>
 				</div>
 			</div>
+			<QuazzCredit />
 		</footer>
 	);
 }

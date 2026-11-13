@@ -1,8 +1,0 @@
-/* clientes: três montes lado a lado, cada um com sua etiqueta */
-.cli {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	column-gap: 32px;
-	align-items: start;
-	margin-top: 48px;
-} /* ui-audit-ok: tres-cards-fileira são exatamente três sites de clientes, e as colunas se desencontram em altura */

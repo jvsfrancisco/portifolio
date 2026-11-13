@@ -1,0 +1,1279 @@
+/* Repaginada (spec 2026-11-12). Organização editorial com os papéis da colagem:
+   títulos em .hd com a palavra recortada (.cw), etiqueta de rotuladora (.rot), recibo, fita e papel.
+   Uma família só (Bricolage Grotesque); Plex Mono só em etiqueta, recibo e contador.
+   Sobre tinta, o acento é o lilás (o roxo some no escuro). */
+
+.ed-wrap {
+	max-width: 1232px;
+	margin: 0 auto;
+	padding: 0 32px;
+	position: relative;
+}
+/* o cabeçalho é fixo no topo: a âncora para um pouco antes, para o título não ficar atrás dele */
+[id] {
+	scroll-margin-top: 84px;
+}
+.ed-h2 {
+	margin: 0 0 0.55em;
+	font-size: clamp(40px, 5vw, 64px);
+}
+
+/* ---------- cabeçalho ---------- */
+.ed-header {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	background: var(--cream);
+	border-bottom: 1px solid var(--line);
+}
+.ed-header-in {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	/* altura fixa: o padding vertical seria zerado pelo .ed-wrap do celular */
+	min-height: 68px;
+}
+.ed-logo {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	min-height: 44px;
+	font-weight: 740;
+	font-size: 19px;
+	letter-spacing: -0.04em;
+	text-decoration: none;
+	white-space: nowrap;
+}
+.ed-avatar {
+	display: block;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	object-fit: cover;
+	background: var(--cream2);
+	box-shadow: 0 0 0 2px var(--paper);
+}
+.ed-nav {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+}
+.ed-nav a:not(.pill) {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 0 12px;
+	font-size: 16px;
+	font-weight: 550;
+	color: var(--ink2);
+	text-decoration: none;
+}
+.ed-nav a:not(.pill):hover {
+	color: var(--ink);
+	text-decoration: underline;
+	text-decoration-color: var(--rx);
+}
+.ed-nav-cv {
+	margin-left: 10px;
+	min-height: 44px;
+	padding: 0 16px;
+	font-size: 16px;
+	white-space: nowrap;
+}
+.ed-menu {
+	display: none;
+}
+.ed-menu-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	height: 40px;
+	padding: 0 16px 0 14px;
+	border: 0;
+	border-radius: 999px;
+	background: var(--lil);
+	color: var(--ink);
+	font: inherit;
+	font-size: 15px;
+	font-weight: 650;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+.ed-menu-btn:hover,
+.ed-menu-btn[aria-expanded="true"] {
+	background: #cfc3d8;
+}
+/* duas linhas que viram um X quando o índice abre */
+.ed-burger {
+	position: relative;
+	display: block;
+	width: 16px;
+	height: 10px;
+}
+.ed-burger i {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	border-radius: 2px;
+	background: currentColor;
+	transition:
+		transform 0.25s var(--ease-out),
+		top 0.25s var(--ease-out);
+}
+.ed-burger i:first-child {
+	top: 0;
+}
+.ed-burger i:last-child {
+	top: 8px;
+	width: 70%;
+}
+[aria-expanded="true"] .ed-burger i:first-child {
+	top: 4px;
+	transform: rotate(45deg);
+}
+[aria-expanded="true"] .ed-burger i:last-child {
+	top: 4px;
+	width: 100%;
+	transform: rotate(-45deg);
+}
+/* índice em papel, preso na tela logo abaixo do cabeçalho; cabe em qualquer largura */
+.ed-menu-sheet {
+	position: fixed;
+	top: 80px;
+	right: 12px;
+	width: min(300px, calc(100vw - 24px));
+	padding: 26px 22px 20px;
+	display: grid;
+	gap: 0;
+	transform: rotate(0.8deg);
+	transform-origin: 100% 0;
+	animation: ed-drop 0.22s var(--ease-out);
+}
+.ed-menu-sheet[hidden] {
+	display: none;
+}
+.ed-menu-tag {
+	position: absolute;
+	top: -14px;
+	left: 16px;
+	--r: -2deg;
+}
+.ed-menu-sheet a:not(.pill) {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 50px;
+	font-size: 21px;
+	font-weight: 680;
+	letter-spacing: -0.025em;
+	text-decoration: none;
+	border-bottom: 1.5px dashed rgba(20, 18, 16, 0.22);
+}
+.ed-menu-sheet a:not(.pill) span {
+	color: var(--rx);
+	transition: transform 0.2s var(--ease-out);
+}
+.ed-menu-sheet a:not(.pill):hover span {
+	transform: translateX(4px);
+}
+.ed-menu-cv {
+	margin-top: 16px;
+	justify-self: start;
+}
+@keyframes ed-drop {
+	from {
+		opacity: 0;
+		transform: translateY(-6px) rotate(2.5deg);
+	}
+}
+
+/* ---------- hero ---------- */
+.ed-hero {
+	--pt: clamp(40px, 6vw, 88px);
+	position: relative;
+	padding: var(--pt) 0 clamp(56px, 8vw, 104px);
+}
+.ed-hero-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+	gap: 32px;
+	align-items: center;
+}
+.ed-name {
+	margin: 0;
+	font-size: clamp(52px, 8vw, 104px);
+	line-height: 0.92;
+}
+/* o sobrenome é o recorte: cai na linha de baixo, do tamanho da palavra */
+.ed-name .cw {
+	display: table;
+	margin-top: 0.06em;
+}
+.ed-lead {
+	margin: 28px 0 0;
+	max-width: 30em;
+	font-size: clamp(19px, 2vw, 24px);
+	line-height: 1.38;
+	font-weight: 560;
+	letter-spacing: -0.015em;
+	color: var(--ink);
+}
+.ed-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-top: 28px;
+}
+
+/* crachá pendurado no cabeçalho */
+.ed-badge {
+	position: relative;
+	justify-self: center;
+	align-self: start;
+}
+.ed-lanyard {
+	position: absolute;
+	left: 50%;
+	width: 24px;
+	margin-left: -12px;
+	transform-origin: 50% 0;
+	background: repeating-linear-gradient(
+		180deg,
+		var(--lil) 0 10px,
+		#cbbfd6 10px 12px
+	);
+} /* ui-audit-ok: gradiente-decorativo é a trama do cordão do crachá, duas tintas do mesmo lilás */
+.ed-badge-wrap {
+	position: relative;
+	margin-top: 12px;
+}
+.ed-badge-wrap > div:not(.ed-badge-card) {
+	position: relative;
+}
+.ed-badge-card {
+	width: min(272px, 76vw);
+	padding: 20px 18px 16px;
+	background: var(--ink);
+	color: var(--cream);
+	border-radius: 14px;
+	filter: var(--sombra2);
+	user-select: none;
+}
+.ed-badge-slot {
+	display: block;
+	width: 48px;
+	height: 9px;
+	margin: -8px auto 16px;
+	border-radius: 6px;
+	background: var(--cream);
+}
+/* a foto do arquivo é redonda; aqui aparece o 3x4 inscrito no círculo, como foto de documento */
+.ed-badge-photo {
+	display: block;
+	width: 62%;
+	aspect-ratio: 3 / 4;
+	margin: 0 auto;
+	overflow: hidden;
+	border: 5px solid var(--paper);
+	border-radius: 3px;
+	background: var(--paper);
+}
+.ed-badge-photo img {
+	display: block;
+	width: 150%;
+	max-width: none;
+	height: auto;
+	margin: -1% 0 0 -25%;
+}
+.ed-badge-name {
+	margin: 16px 0 8px;
+	font-size: 26px;
+	line-height: 1;
+	color: var(--cream);
+}
+.ed-badge-card dl {
+	margin: 0;
+}
+.ed-badge-card dl div {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 7px 0;
+	border-top: 1px solid rgba(243, 239, 230, 0.18);
+	font-size: 15px;
+	line-height: 1.35;
+}
+.ed-badge-card dt {
+	padding-top: 2px;
+	font-family: var(--mono);
+	font-size: 13px;
+	text-transform: uppercase;
+	color: rgba(243, 239, 230, 0.7);
+}
+.ed-badge-card dd {
+	margin: 0;
+	text-align: right;
+}
+
+/* ---------- sobre ---------- */
+.ed-about {
+	padding: 0 0 clamp(64px, 9vw, 120px);
+}
+.ed-about-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+	gap: clamp(32px, 5vw, 72px);
+	align-items: start;
+}
+.ed-about-lead {
+	margin: 0 0 20px;
+	max-width: 21em;
+	font-size: clamp(22px, 2.3vw, 30px);
+	line-height: 1.25;
+	font-weight: 620;
+	letter-spacing: -0.02em;
+	color: var(--ink);
+}
+.ed-about-p {
+	margin: 0 0 14px;
+	max-width: 34em;
+	font-size: 18px;
+	line-height: 1.55;
+}
+/* a mesa: recortes das marcas colados com fita; com mouse dá para arrastar */
+.ed-board {
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	align-items: start;
+	gap: 30px 24px;
+	padding: 14px 8px;
+}
+.ed-cut {
+	position: absolute;
+	margin: 0;
+	padding: 7px 7px 3px;
+	background: var(--paper);
+	box-shadow:
+		0 1px 1px rgba(20, 18, 16, 0.22),
+		0 6px 9px rgba(20, 18, 16, 0.12);
+	touch-action: none;
+} /* ui-audit-ok: sombra-generica o recorte flutua sobre a mesa e pode ser arrastado; um nível só */
+.ed-cut img {
+	display: block;
+	width: 100%;
+	height: auto;
+	pointer-events: none;
+}
+.ed-cut figcaption {
+	padding: 5px 2px 3px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.25;
+	color: var(--ink);
+}
+.ed-board .ed-cut {
+	position: relative;
+	width: 100%;
+	inset: auto;
+}
+.ed-board-cap {
+	margin: 20px 0 0;
+	font-size: 15px;
+}
+
+/* ---------- seções escuras ---------- */
+.ed-dark {
+	position: relative;
+	margin: 0 12px;
+	padding: clamp(56px, 8vw, 104px) 0;
+	background: var(--ink);
+	color: var(--cream);
+	border-radius: 28px;
+	overflow: hidden;
+}
+.ed-dark h2,
+.ed-dark h3,
+.ed-dark h4 {
+	color: var(--cream);
+}
+.ed-dark a {
+	color: var(--cream);
+}
+.ed-dark a:hover {
+	text-decoration-color: var(--lil);
+}
+.ed-dark a:focus-visible,
+.ed-dark button:focus-visible,
+.ed-dark summary:focus-visible,
+.ed-dark ul:focus-visible {
+	outline-color: var(--cream);
+}
+.ed-dark .cw {
+	padding: 0;
+	color: var(--lil);
+}
+.ed-dark .cw::before {
+	display: none;
+}
+/* a fita multiplica com o papel; fora dele, no escuro, sumiria */
+.ed-dark .fita {
+	mix-blend-mode: normal;
+}
+
+/* ---------- projetos / carrossel ---------- */
+.ed-carousel-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px 24px;
+	flex-wrap: wrap;
+}
+.ed-carousel-head .ed-h2 {
+	margin: 0;
+}
+.ed-arrows {
+	display: flex;
+	gap: 10px;
+}
+.ed-arrows button {
+	display: grid;
+	place-items: center;
+	width: 64px;
+	height: 46px;
+	border: 0;
+	border-radius: 5px;
+	background: var(--lil);
+	color: var(--ink);
+	box-shadow: 0 3px 0 rgba(243, 239, 230, 0.3);
+	transform: rotate(-2deg);
+	cursor: pointer;
+	transition:
+		transform 0.18s var(--ease-out),
+		box-shadow 0.18s var(--ease-out);
+}
+.ed-arrows button:last-child {
+	background: var(--paper);
+	transform: rotate(1.6deg);
+}
+.ed-arrows button:hover:not(:disabled) {
+	transform: translateY(-2px) rotate(0deg);
+	box-shadow: 0 5px 0 rgba(243, 239, 230, 0.3);
+}
+.ed-arrows button:active:not(:disabled) {
+	transform: translateY(2px);
+	box-shadow: 0 1px 0 rgba(243, 239, 230, 0.3);
+}
+.ed-arrows button:disabled {
+	opacity: 0.3;
+	cursor: default;
+}
+.ed-sr {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+/* abas com o nome de cada projeto: mostram onde você está e levam direto */
+.ed-progress {
+	display: flex;
+	gap: 6px;
+	margin: 20px 0 0;
+	padding: 0;
+	list-style: none;
+}
+.ed-progress li {
+	flex: 1;
+	min-width: 0;
+}
+.ed-progress button {
+	display: block;
+	width: 100%;
+	min-height: 44px;
+	padding: 10px 0 0;
+	border: 0;
+	border-top: 3px solid rgba(243, 239, 230, 0.22);
+	background: transparent;
+	color: rgba(243, 239, 230, 0.6);
+	font: 600 13px / 1.3 var(--mono);
+	text-align: left;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+.ed-progress button span {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.ed-progress button:hover {
+	color: var(--cream);
+}
+.ed-progress button[aria-current="true"] {
+	border-top-color: var(--lil);
+	color: var(--cream);
+}
+/* o card do projeto: um painel com respiro em volta */
+.ed-viewport {
+	overflow: hidden;
+	padding: clamp(20px, 3vw, 36px);
+	border-radius: 18px;
+	background: rgba(243, 239, 230, 0.045);
+	box-shadow: inset 0 0 0 1px rgba(243, 239, 230, 0.08);
+	margin-top: 8px;
+	touch-action: pan-y;
+}
+.ed-track {
+	display: flex;
+	align-items: flex-start;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+/* todo slide ocupa a largura inteira e a altura do mais alto; o que não é o ativo some */
+.ed-slide {
+	flex: 0 0 100%;
+	min-width: 0;
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+	gap: clamp(24px, 3vw, 40px);
+	align-items: center;
+	padding: 18px 12px;
+	opacity: 0;
+	transition: opacity 0.35s ease-out;
+}
+.ed-slide.is-active {
+	opacity: 1;
+}
+.ed-kind {
+	margin: 0 0 14px;
+}
+.ed-kind .rot {
+	--r: -1.5deg;
+}
+.ed-slide-title {
+	margin: 0;
+	font-size: clamp(28px, 3.2vw, 44px);
+}
+.ed-slide-sum {
+	margin: 14px 0 0;
+	max-width: 34em;
+	font-size: 16.5px;
+	line-height: 1.55;
+	color: rgba(243, 239, 230, 0.88);
+}
+/* stack em linha, como na etiqueta de uma peça: nomes separados por ponto */
+.ed-stack {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 0;
+	margin: 18px 0 0;
+	padding: 0;
+	list-style: none;
+	font: 600 13.5px / 1.4 var(--mono);
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--lil);
+}
+.ed-stack li:not(:last-child)::after {
+	content: "·";
+	padding: 0 0.7em;
+	color: rgba(243, 239, 230, 0.5);
+}
+.ed-points {
+	margin: 10px 0 0;
+	padding: 0 0 0 1.1em;
+	font-size: 16px;
+	line-height: 1.5;
+}
+.ed-points li {
+	margin: 6px 0;
+}
+/* os números da Serena saem num recibo, como os do PDV */
+.ed-receipt {
+	max-width: 420px;
+	margin-top: 20px;
+	transform: rotate(-1deg);
+}
+.ed-receipt dl {
+	margin: 0;
+	padding: 4px 16px 16px;
+}
+.ed-receipt dl div {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
+	padding: 8px 0;
+	border-top: 1.5px dashed rgba(42, 38, 34, 0.3);
+}
+.ed-receipt dl div:first-child {
+	border-top: 0;
+}
+.ed-receipt dt {
+	flex: 0 0 7.2em;
+	font: 740 19px / 1.1 var(--sans);
+	letter-spacing: -0.03em;
+	color: var(--ink);
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+.ed-receipt dd {
+	margin: 0;
+	font-size: 13.5px;
+	line-height: 1.35;
+}
+.ed-link {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	margin-top: 18px;
+	font-weight: 650;
+	overflow-wrap: anywhere;
+}
+.ed-note {
+	margin: 16px 0 0;
+	max-width: 34em;
+	font-size: 15px;
+	color: rgba(243, 239, 230, 0.74);
+}
+.ed-details {
+	margin-top: 20px;
+	border-top: 1px solid rgba(243, 239, 230, 0.2);
+	padding-top: 4px;
+}
+.ed-details summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	min-height: 48px;
+	cursor: pointer;
+	font-weight: 650;
+	list-style: none;
+}
+.ed-details summary::-webkit-details-marker {
+	display: none;
+}
+.ed-details summary::after {
+	content: "+";
+	flex: 0 0 auto;
+	display: grid;
+	place-items: center;
+	width: 32px;
+	height: 32px;
+	border: 1.5px solid currentColor;
+	border-radius: 50%;
+	font-size: 20px;
+	line-height: 1;
+}
+.ed-details[open] summary::after {
+	content: "−";
+}
+.ed-details-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 8px 48px;
+	padding-top: 8px;
+	color: rgba(243, 239, 230, 0.88);
+}
+.ed-details-grid h4,
+.ed-stories h4 {
+	margin: 12px 0 0;
+	font-size: 17px;
+}
+.ed-stories {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 8px 32px;
+	margin-top: 20px;
+	padding-top: 8px;
+	border-top: 1.5px dashed rgba(243, 239, 230, 0.26);
+}
+.ed-stories p {
+	margin: 4px 0 0;
+	font-size: 15px;
+	line-height: 1.5;
+	color: rgba(243, 239, 230, 0.86);
+}
+
+/* ver mais: painel que cobre a coluna de texto e rola por dentro */
+.ed-slide-tx {
+	position: relative;
+}
+.ed-more-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	min-height: 44px;
+	margin-top: 14px;
+	padding: 0 16px;
+	border: 1.5px solid rgba(243, 239, 230, 0.5);
+	border-radius: 999px;
+	background: transparent;
+	color: var(--cream);
+	font: inherit;
+	font-size: 15px;
+	font-weight: 650;
+	cursor: pointer;
+}
+.ed-more-btn span {
+	color: var(--lil);
+	font-size: 18px;
+	line-height: 1;
+}
+.ed-more-btn:hover {
+	border-color: var(--lil);
+}
+.ed-more {
+	position: absolute;
+	inset: -10px -14px;
+	z-index: 30;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	padding: 0 20px 22px;
+	border-radius: 14px;
+	background: #1f1b21;
+	box-shadow:
+		inset 0 0 0 1px rgba(243, 239, 230, 0.12),
+		0 12px 28px rgba(0, 0, 0, 0.45);
+	color: rgba(243, 239, 230, 0.88);
+	animation: ed-more-in 0.22s var(--ease-out);
+	scrollbar-width: thin;
+	scrollbar-color: rgba(243, 239, 230, 0.35) transparent;
+}
+@keyframes ed-more-in {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+}
+.ed-more-head {
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 16px 0 10px;
+	background: #1f1b21;
+	border-bottom: 1px solid rgba(243, 239, 230, 0.14);
+}
+.ed-more-head h4 {
+	margin: 0;
+	font-size: 20px;
+	outline: none;
+}
+.ed-more-head button {
+	min-height: 40px;
+	padding: 0 14px;
+	border: 0;
+	border-radius: 999px;
+	background: var(--lil);
+	color: var(--ink);
+	font: inherit;
+	font-size: 14px;
+	font-weight: 650;
+	cursor: pointer;
+}
+.ed-more-group h5 {
+	margin: 18px 0 0;
+	font: 600 13px / 1.3 var(--mono);
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--lil);
+}
+.ed-more-group .ed-points {
+	margin-top: 6px;
+	font-size: 15px;
+}
+.ed-more-group article {
+	margin-top: 12px;
+	padding-top: 10px;
+	border-top: 1.5px dashed rgba(243, 239, 230, 0.22);
+}
+.ed-more-group h6 {
+	margin: 0;
+	font-size: 16px;
+	color: var(--cream);
+}
+.ed-more-group article p {
+	margin: 4px 0 0;
+	font-size: 15px;
+	line-height: 1.5;
+}
+.ed-more .ed-note {
+	margin-top: 18px;
+	font-size: 13.5px;
+	color: rgba(243, 239, 230, 0.65);
+}
+@media (max-width: 900px) {
+	.ed-more {
+		inset: -8px -6px;
+		padding: 0 14px 18px;
+	}
+}
+
+/* telas em recorte, presas com ímã; com mouse dá para arrastar */
+.ed-slide-mo {
+	position: relative;
+	aspect-ratio: 1.2;
+}
+.ed-shot {
+	position: absolute;
+	margin: 0;
+	padding: 7px;
+	background: var(--paper);
+	touch-action: none;
+}
+.ed-shot img {
+	display: block;
+	width: 100%;
+	height: auto;
+	pointer-events: none;
+}
+/* grade solta: principal em cima à esquerda, celular em cima à direita,
+   duas pequenas no meio e duas largas embaixo; quase sem sobreposição */
+.ed-shot-1 {
+	top: 0;
+	left: 0;
+	width: 60%;
+	z-index: 1;
+}
+.ed-shot-2 {
+	right: 0;
+	top: 2%;
+	width: 22%;
+	z-index: 2;
+}
+.ed-shot-3 {
+	left: 0;
+	bottom: 0;
+	width: 46%;
+	z-index: 3;
+}
+.ed-shot-4 {
+	right: 0;
+	bottom: 0;
+	width: 46%;
+	z-index: 3;
+}
+.ed-shot-5 {
+	left: 4%;
+	top: 46%;
+	width: 20%;
+	z-index: 4;
+}
+.ed-shot-6 {
+	left: 30%;
+	top: 44%;
+	width: 24%;
+	z-index: 4;
+}
+/* ímã: disco roxo que prende o recorte; nos projetos leva o cristal da Quazz */
+.ed-magnet {
+	position: absolute;
+	top: -10px;
+	left: 50%;
+	z-index: 6;
+	display: grid;
+	place-items: center;
+	width: 26px;
+	height: 26px;
+	margin-left: -13px;
+	border-radius: 50%;
+	background: var(--rx);
+	color: var(--paper);
+	box-shadow:
+		inset 0 0 0 2px rgba(255, 253, 248, 0.22),
+		0 2px 3px rgba(20, 18, 16, 0.4);
+} /* ui-audit-ok: sombra-generica o ímã tem espessura e fica acima do papel */
+/* ímã das marcas: disco lilás com o tucano */
+.ed-magnet-toucan {
+	top: -17px;
+	width: 38px;
+	height: 38px;
+	margin-left: -19px;
+	background: var(--lil);
+	box-shadow:
+		inset 0 0 0 2px rgba(91, 63, 104, 0.28),
+		0 2px 3px rgba(20, 18, 16, 0.4);
+}
+
+.ed-foot {
+	margin: 28px 0 0;
+	max-width: 52em;
+	font-size: 15px;
+	line-height: 1.55;
+	color: rgba(243, 239, 230, 0.74);
+}
+
+/* ---------- habilidades ---------- */
+.ed-rows {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.ed-row {
+	display: grid;
+	grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+	gap: 16px 32px;
+	align-items: center;
+	padding: 22px 0;
+	border-top: 1px solid rgba(243, 239, 230, 0.16);
+}
+.ed-row h3 {
+	margin: 0;
+	font-size: clamp(22px, 2.4vw, 32px);
+	line-height: 1.05;
+}
+.ed-stickers {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px 12px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+/* adesivo: quadrado de papel com a logo em tinta, cada um colado um pouco torto */
+.ed-sticker {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	min-width: 92px;
+	padding: 14px 12px 10px;
+	background: var(--paper);
+	color: var(--ink);
+	font-size: 13.5px;
+	font-weight: 600;
+	line-height: 1.2;
+	text-align: center;
+	clip-path: polygon(
+		1% 2%,
+		38% 0,
+		71% 1.4%,
+		99% 0,
+		100% 41%,
+		98.6% 98%,
+		58% 100%,
+		22% 98.4%,
+		0 100%,
+		1.2% 54%
+	);
+	transform: rotate(-1.6deg);
+	transition: transform 0.18s var(--ease-out);
+}
+.ed-sticker:nth-child(even) {
+	transform: rotate(1.3deg);
+}
+.ed-sticker:nth-child(3n) {
+	transform: rotate(0.5deg);
+}
+.ed-sticker:hover {
+	transform: translateY(-3px);
+}
+.ed-label {
+	--r: -1.4deg;
+}
+.ed-label:nth-child(even) {
+	--r: 1.1deg;
+}
+
+/* ---------- currículo ---------- */
+.ed-resume {
+	padding: clamp(64px, 9vw, 120px) 0 24px;
+}
+.ed-resume-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+	gap: clamp(32px, 6vw, 88px);
+}
+.ed-sub {
+	margin: 0 0 8px;
+	padding-bottom: 12px;
+	border-bottom: 2px solid var(--ink);
+	font-size: 26px;
+	line-height: 1;
+}
+.ed-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.ed-entry {
+	display: grid;
+	grid-template-columns: 9.5em minmax(0, 1fr);
+	gap: 8px 20px;
+	padding: 24px 0;
+	border-bottom: 1px solid var(--line);
+}
+.ed-period {
+	margin: 0;
+	padding-top: 6px;
+	font-family: var(--mono);
+	font-size: 13px;
+	color: var(--ink2);
+}
+.ed-entry h4 {
+	margin: 0 0 6px;
+	font-size: 22px;
+	line-height: 1.2;
+}
+.ed-entry h4 span {
+	font-weight: 500;
+	color: var(--ink2);
+}
+.ed-entry p {
+	margin: 0;
+	font-size: 17px;
+	line-height: 1.5;
+}
+.ed-details-light {
+	border-top: 1px dashed rgba(20, 18, 16, 0.3);
+	margin-top: 14px;
+}
+.ed-details-light summary {
+	color: var(--ink);
+}
+.ed-details-light h5 {
+	margin: 18px 0 0;
+	font-size: 16px;
+	color: var(--ink);
+}
+.ed-details-light .ed-points {
+	margin-top: 6px;
+	color: var(--ink2);
+}
+
+/* ---------- crédito da Quazz, com o easter egg ---------- */
+.ed-credit {
+	display: flex;
+	justify-content: center;
+	margin: 0;
+	padding: 72px 16px 56px;
+}
+.quazz-easter {
+	display: inline-flex;
+	max-width: 100%;
+	min-height: 44px;
+	align-items: center;
+	color: var(--ink);
+	text-decoration: none;
+}
+/* papelzinho colado com fita; o logo é um cupom com linha de recorte */
+.quazz-slip {
+	position: relative;
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 6px 10px;
+	max-width: 100%;
+	padding: 10px 14px;
+	background: var(--paper);
+	font-size: 11.5px;
+	font-weight: 600;
+	line-height: 1.2;
+	transform: rotate(-1.5deg);
+	box-shadow: 0 1px 1px rgba(20, 18, 16, 0.2);
+} /* ui-audit-ok: sombra-generica é 1px de espessura do papel colado, como na etiqueta */
+.quazz-slip .fita {
+	top: -10px;
+	left: 30%;
+	--tw: 44px;
+	--tr: 4deg;
+	height: 16px;
+}
+.quazz-cutout {
+	position: relative;
+	display: inline-block;
+	width: 76px;
+	height: 28px;
+	outline: 1.5px dashed rgba(20, 18, 16, 0.55);
+	outline-offset: 0;
+}
+/* o buraco que fica no papel quando o recorte sai */
+.quazz-hole {
+	position: absolute;
+	inset: 0;
+	background: var(--cream2);
+	box-shadow: inset 0 1px 3px rgba(20, 18, 16, 0.25);
+}
+.quazz-piece {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	background: var(--paper);
+	transform-origin: 30% 80%;
+}
+.quazz-logo {
+	width: auto;
+	height: 16px;
+}
+.quazz-scissors {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	opacity: 0;
+	offset-path: path("M -1 -1 H 77 V 29 H -1 Z");
+	offset-rotate: auto;
+	offset-anchor: center;
+	pointer-events: none;
+}
+.quazz-easter:hover .quazz-cutout {
+	outline-color: var(--rx);
+}
+.is-cut .quazz-scissors {
+	animation: qz-scissors 2.3s linear both;
+}
+.is-cut .quazz-piece {
+	animation: qz-piece 2.3s var(--ease-out) both;
+}
+@keyframes qz-scissors {
+	0% {
+		opacity: 1;
+		offset-distance: 0%;
+	}
+	52% {
+		opacity: 1;
+		offset-distance: 100%;
+	}
+	58%,
+	100% {
+		opacity: 0;
+		offset-distance: 100%;
+	}
+}
+@keyframes qz-piece {
+	0%,
+	52% {
+		transform: none;
+		box-shadow: none;
+	}
+	72%,
+	100% {
+		transform: translate(6px, -16px) rotate(-9deg) scale(1.12);
+		box-shadow: 0 6px 10px rgba(20, 18, 16, 0.22);
+	}
+}
+
+/* ---------- telas menores ---------- */
+@media (max-width: 900px) {
+	.ed-nav {
+		display: none;
+	}
+	.ed-menu {
+		display: block;
+	}
+	.ed-hero-grid,
+	.ed-about-grid,
+	.ed-resume-grid,
+	.ed-row,
+	.ed-slide {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.ed-slide-mo {
+		order: -1;
+	}
+	/* sem coluna ao lado do cabeçalho, o cordão não tem onde pendurar */
+	.ed-badge-slot {
+		display: none;
+	}
+	.ed-badge-wrap {
+		margin-top: 0;
+	}
+	.ed-badge {
+		margin-top: 96px;
+	}
+	.ed-badge-wrap {
+		margin-top: 0;
+	}
+	.ed-details-grid,
+	.ed-stories {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.ed-slide {
+		align-items: start;
+		align-content: start;
+	}
+}
+@media (max-width: 600px) {
+	.ed-wrap {
+		padding: 0 20px;
+	}
+	.ed-dark {
+		margin: 0 8px;
+		border-radius: 20px;
+	}
+	.ed-entry {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.ed-progress button span {
+		display: none;
+	}
+	.ed-progress button {
+		min-height: 24px;
+	}
+	.ed-cut figcaption {
+		font-size: 13px;
+	}
+	/* Duas colunas deixam todas as marcas e suas etiquetas visíveis. */
+	.ed-board {
+		margin: 18px 4px 0;
+		gap: 24px 18px;
+	}
+	.ed-slide-mo {
+		margin: 8px 0;
+		aspect-ratio: 1.2;
+	}
+	.ed-shot-1 {
+		width: 66%;
+	}
+	.ed-shot-2 {
+		width: 24%;
+	}
+	.ed-shot-3 {
+		width: 46%;
+	}
+	.ed-shot-4 {
+		width: 46%;
+		bottom: 0;
+	}
+	.ed-shot-5 {
+		width: 24%;
+		top: 43%;
+		left: 4%;
+	}
+	.ed-shot-6 {
+		width: 26%;
+		top: 43%;
+		left: 33%;
+	}
+	.ed-viewport {
+		margin: 0 -8px;
+		padding: 16px 14px 22px;
+	}
+	.ed-sticker {
+		min-width: 84px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ed-slide,
+	.ed-sticker,
+	.quazz-crystal {
+		transition: none;
+	}
+	.ed-menu-sheet {
+		animation: none;
+	}
+}

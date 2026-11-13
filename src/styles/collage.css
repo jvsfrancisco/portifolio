@@ -25,30 +25,9 @@
 		.6% 52%
 	);
 }
-.sheet.corte::before {
-	filter: none;
-	clip-path: polygon(
-		.8% 1.2%,
-		36% 0,
-		72% 1%,
-		99.4% 0,
-		100% 46%,
-		99.2% 98.8%,
-		61% 100%,
-		24% 98.9%,
-		0 100%,
-		.6% 52%
-	);
-}
 .kraft {
 	--bgc: #c9ab80;
 	--bgi: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='k'><feTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .2 0'/></filter><rect width='100%' height='100%' filter='url(%23k)'/></svg>");
-}
-.quad {
-	--bgi:
-		linear-gradient(90deg, rgba(78, 72, 64, 0.11) 1px, transparent 1px),
-		linear-gradient(180deg, rgba(78, 72, 64, 0.11) 1px, transparent 1px);
-	--bgs: 22px 22px;
 } /* ui-audit-ok: gradiente-decorativo quadriculado da folha milimetrada, mesmo matiz da tinta */
 .paut {
 	--bgi: repeating-linear-gradient(
@@ -57,52 +36,6 @@
 		rgba(78, 72, 64, 0.17) 25px 26px
 	);
 	--bgs: auto;
-} /* ui-audit-ok: gradiente-decorativo pauta de caderno na cor da tinta, sem azul */
-.sheet.rtop::before {
-	filter: none;
-	clip-path: polygon(
-		0 100%,
-		0 14px,
-		3.3% 7px,
-		6.7% 9px,
-		10% 11px,
-		13.3% 2px,
-		16.7% 5px,
-		20% 18px,
-		23.3% 5px,
-		26.7% 7px,
-		30% 2px,
-		33.3% 18px,
-		36.7% 13px,
-		40% 2px,
-		43.3% 5px,
-		46.7% 11px,
-		50% 11px,
-		53.3% 5px,
-		56.7% 13px,
-		60% 5px,
-		63.3% 18px,
-		66.7% 11px,
-		70% 2px,
-		73.3% 5px,
-		76.7% 13px,
-		80% 2px,
-		83.3% 11px,
-		86.7% 2px,
-		90% 13px,
-		93.3% 2px,
-		96.7% 18px,
-		100% 12px,
-		100% 100%
-	);
-}
-.sheet.veg {
-	filter: drop-shadow(0 1px 1px rgba(20, 18, 16, 0.14));
-}
-.sheet.veg::before {
-	filter: none;
-	background: rgba(255, 253, 248, 0.58);
-	clip-path: polygon(0 .6%, 64% 0, 100% 1%, 99.6% 100%, 30% 99.2%, .3% 100%);
 }
 /* papel térmico: serrilhado em cima e embaixo; o texto é Bricolage, só o cabeçalho e o código são de máquina */
 .recibo {
@@ -145,41 +78,6 @@
 }
 .recibo li {
 	overflow-wrap: anywhere;
-}
-.recibo .code li {
-	white-space: pre-wrap;
-	font: 400 14.5px / 1.6 var(--mono);
-}
-.recibo .cm {
-	color: #6b645a;
-}
-.recibo .pr::before {
-	content: "> " / "";
-	color: var(--rx);
-	font-weight: 700;
-}
-.recibo .bad {
-	color: var(--rx);
-	font-weight: 700;
-}
-.recibo .gap {
-	height: 10px;
-}
-.recibo .duo li {
-	display: flex;
-	justify-content: space-between;
-	gap: 8px 16px;
-	flex-wrap: wrap;
-	padding: 8px 0;
-	border-top: 1.5px dashed rgba(42, 38, 34, 0.25);
-	color: var(--ink2);
-}
-.recibo .duo li:first-child {
-	border-top: 0;
-}
-.recibo .duo b {
-	color: var(--ink);
-	font-weight: 650;
 }
 
 /* fitas */
@@ -253,93 +151,6 @@
 	z-index: -1;
 	background: var(--paper);
 	clip-path: polygon(0 4%, 47% 0, 100% 6%, 99.2% 96%, 52% 100%, .6% 94%);
-}
-/* stack: uma fileira de etiquetas de rotuladora, cada uma um pouco torta */
-.tags {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 8px 8px;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-.tags .rot {
-	--r: -1.2deg;
-	padding: 8px 8px 8px 16px;
-	font: 600 15px / 1.25 var(--sans);
-	text-transform: none;
-	letter-spacing: 0;
-}
-.tags .rot:nth-child(3n + 2) {
-	--r: 1.4deg;
-}
-.tags .rot:nth-child(3n) {
-	--r: -0.4deg;
-}
-.tg-h {
-	display: block;
-	margin: 24px 0 8px;
-	font-size: 15px;
-	font-weight: 650;
-	color: var(--ink);
-}
-
-/* seta recortada em papel roxo */
-.seta {
-	flex: 0 0 auto;
-	overflow: visible;
-	transform: rotate(var(--r, 0deg));
-	filter: drop-shadow(0 1px 1px rgba(20, 18, 16, 0.3));
-}
-.seta path {
-	fill: var(--rx);
-}
-
-/* selos dos números */
-.num {
-	position: absolute;
-	left: -10px;
-	top: -14px;
-	z-index: 7;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 50px;
-	height: 54px;
-	padding-top: 4px;
-	background: var(--rx);
-	color: var(--paper);
-	font-size: 30px;
-	font-weight: 760;
-	letter-spacing: -0.04em;
-	line-height: 1;
-	clip-path: polygon(
-		4% 4%,
-		58% 0,
-		96% 3%,
-		100% 52%,
-		95% 97%,
-		40% 100%,
-		0 95%,
-		3% 48%
-	);
-	transform: rotate(var(--nr, -5deg));
-}
-.num.ca {
-	left: -14px;
-	top: -18px;
-	width: 54px;
-	height: 54px;
-	padding-top: 0;
-	clip-path: none;
-	background: var(--paper);
-	color: var(--rx);
-	border: 2.5px solid var(--rx);
-	border-radius: 4px;
-	box-shadow:
-		inset 0 0 0 3px var(--paper),
-		inset 0 0 0 4.5px rgba(91, 63, 104, 0.55);
-	transform: rotate(var(--nr, -9deg));
 } /* ui-audit-ok: sombra-generica é o fio duplo do carimbo, não sombra */
 .slip {
 	position: relative;
@@ -354,77 +165,6 @@
 .slip p b {
 	color: var(--ink);
 	font-weight: 650;
-}
-
-/* recortes */
-.board {
-	display: block;
-	position: relative;
-	width: 100%;
-	margin: 0;
-	cursor: pointer;
-}
-.pc {
-	position: absolute;
-	display: block;
-	left: var(--x, 0);
-	top: var(--y, 0);
-	width: var(--w, 50%);
-	transform: rotate(var(--r, 0deg));
-	filter: var(--sombra);
-	transition: filter 180ms ease-out;
-}
-.pc img {
-	display: block;
-	width: 100%;
-	height: auto;
-}
-.rasg::before {
-	content: "";
-	position: absolute;
-	inset: -8px;
-	background: var(--paper);
-	clip-path: polygon(
-		0 1.5%,
-		41% .3%,
-		77% 1.4%,
-		100% 0,
-		99.4% 44%,
-		100% 97.8%,
-		63% 100%,
-		27% 98.7%,
-		.4% 99.6%,
-		0 49%
-	);
-}
-.rasg img {
-	position: relative;
-	clip-path: polygon(
-		.6% .9%,
-		30% 0,
-		66% 1.2%,
-		99.5% .4%,
-		100% 38%,
-		99% 99.2%,
-		58% 100%,
-		19% 98.9%,
-		0 100%,
-		.8% 55%
-	);
-}
-.rasg.b img {
-	clip-path: polygon(
-		.8% 1.2%,
-		36% 0,
-		72% 1%,
-		99.4% 0,
-		100% 46%,
-		99.2% 98.8%,
-		61% 100%,
-		24% 98.9%,
-		0 100%,
-		.6% 52%
-	);
 }
 .tes {
 	background: var(--paper);
@@ -447,76 +187,4 @@
 }
 .tesw > .tes {
 	display: block;
-}
-.win {
-	background: var(--paper);
-	padding: 0 8px 8px;
-	border-radius: 2px;
-}
-.wbar {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	height: 32px;
-	padding: 0 8px;
-}
-.wbar i {
-	width: 9px;
-	height: 9px;
-	border-radius: 50%;
-	background: #d3caba;
-	flex: 0 0 auto;
-}
-.wbar .ad {
-	margin-left: 8px;
-	min-width: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	font: 500 13px / 1 var(--mono);
-	color: var(--ink2);
-}
-.polar {
-	background: var(--paper);
-	padding: 8px 8px 48px;
-	container-type: inline-size;
-}
-.polar .leg {
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 12px;
-	text-align: center;
-	font-size: clamp(13px, 6.6cqi, 15px);
-	font-weight: 560;
-	color: var(--ink2);
-	white-space: nowrap;
-	letter-spacing: -0.005em;
-}
-.round {
-	border-radius: 50%;
-	padding: 8px;
-	background: var(--paper);
-}
-.round img {
-	border-radius: 50%;
-}
-.pilula {
-	border-radius: 999px;
-	padding: 4px;
-	background: var(--paper);
-}
-.pilula img {
-	border-radius: 999px;
-}
-.note {
-	position: absolute;
-	display: block;
-	left: var(--x);
-	top: var(--y);
-	z-index: 8;
-}
-.cap {
-	display: block;
-	margin-top: 16px;
 }

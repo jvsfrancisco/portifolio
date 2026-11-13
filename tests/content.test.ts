@@ -1,6 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { aiSpines } from "#/content/ai";
-import { contact, nav, profile, summary } from "#/content/profile";
+import {
+	about,
+	azzasShots,
+	azzasShotsCaption,
+	badge,
+	contact,
+	nav,
+	profile,
+} from "#/content/profile";
+import { projects } from "#/content/projects";
 import { skillGroups } from "#/content/skills";
 import { timeline } from "#/content/timeline";
 
@@ -18,7 +27,11 @@ describe("conteúdo", () => {
 		profile,
 		nav,
 		contact,
-		summary,
+		badge,
+		about,
+		azzasShots,
+		azzasShotsCaption,
+			projects,
 		skillGroups,
 		timeline,
 		aiSpines,
@@ -26,7 +39,9 @@ describe("conteúdo", () => {
 
 	it("não tem buraco de template nem marcador de rascunho", () => {
 		for (const s of all) {
-			expect(s).not.toMatch(/\{\{|\}\}|lorem|TODO/i);
+			// "todo" em minúscula é português ("nem todo site"); o marcador de rascunho é TODO em caixa alta.
+			expect(s).not.toMatch(/\{\{|\}\}|lorem/i);
+			expect(s).not.toMatch(/\bTODO\b/);
 		}
 	});
 
@@ -34,17 +49,17 @@ describe("conteúdo", () => {
 		for (const s of all) expect(s.trim()).not.toBe("");
 	});
 
-	it("usa o mesmo formato de período no trajeto", () => {
+	it("usa o mesmo formato de período no currículo", () => {
 		const ok =
 			/^(jan a out\/\d{4} · \d+ meses|(\w{3}\/)?\d{4}( a \d{4}| até hoje)?|\w{3}\/\d{4} até hoje)$/;
 		for (const ev of timeline) expect(ev.period, ev.id).toMatch(ok);
 	});
 
 	it("tem ids únicos", () => {
-		const ids = timeline.map((e) => e.id);
-		expect(new Set(ids).size).toBe(ids.length);
-		const spines = aiSpines.map((s) => s.id);
-		expect(new Set(spines).size).toBe(spines.length);
+		for (const list of [timeline, projects, aiSpines]) {
+			const ids = list.map((e) => e.id);
+			expect(new Set(ids).size).toBe(ids.length);
+		}
 	});
 
 	it("tem um painel para cada aba de IA", async () => {
@@ -53,10 +68,32 @@ describe("conteúdo", () => {
 			expect(aiPanels[s.id], s.id).toBeTypeOf("function");
 	});
 
-	it("a barra do trajeto cabe na grade", () => {
-		for (const ev of timeline) {
-			expect(ev.bar.fim, ev.id).toBeLessThanOrEqual(ev.bar.n);
-			expect(ev.bar.ini, ev.id).toBeLessThanOrEqual(ev.bar.fim);
+	it("todo item do currículo é de experiência ou de formação", () => {
+		for (const ev of timeline) expect(["work", "study"], ev.id).toContain(ev.kind);
+		expect(timeline.some((e) => e.kind === "work")).toBe(true);
+		expect(timeline.some((e) => e.kind === "study")).toBe(true);
+	});
+
+	it("todo projeto tem imagem com dimensões e texto alternativo", () => {
+		for (const p of projects) {
+			expect(p.images.length, p.id).toBeGreaterThan(0);
+			for (const img of p.images) {
+				expect(img.width, img.src).toBeGreaterThan(0);
+				expect(img.height, img.src).toBeGreaterThan(0);
+				expect(img.alt.length, img.src).toBeGreaterThan(10);
+				expect(img.src, img.src).toMatch(/^\/img\//);
+			}
 		}
+	});
+
+	it("os links de projeto são https", () => {
+		for (const p of projects)
+			if (p.link) expect(p.link.href, p.id).toMatch(/^https:\/\//);
+	});
+
+	it("mantém os fatos que não podem divergir", () => {
+		const text = all.join(" ");
+		expect(text).toContain("19/09/2026");
+		expect(text).toMatch(/R\$\s?15 mil/);
 	});
 });

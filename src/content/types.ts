@@ -2,48 +2,69 @@
 
 export type SkillItem = {
 	name: string;
-	/** inclinação do adesivo, em graus (só para os ícones) */
-	tilt?: number;
-	/** path de um SVG 24x24 com a logo em tinta (só para os ícones) */
+	/** path de um SVG 24x24 com a logo em tinta; sem ele, a skill vira etiqueta de texto */
 	icon?: string;
+	/** o path usa fill-rule evenodd (desenho com furos) */
+	evenodd?: boolean;
 };
 
 export type SkillGroup = {
 	title: string;
 	/** rótulo da lista para leitores de tela */
 	label: string;
-	kind: "icons" | "tags";
 	items: SkillItem[];
 };
 
-export type Tape = {
-	side: "left" | "right";
-	/** distância da borda, ex.: '30%' */
-	at: string;
-	/** rotação em graus */
-	tilt: number;
-	/** fita lilás listrada em vez da neutra */
-	washi?: boolean;
+export type ProjectImage = {
+	src: string;
+	width: number;
+	height: number;
+	alt: string;
 };
+
+export type ProjectStory = { title: string; body: string };
+
+/** Texto longo de um projeto: fica fechado e abre num painel que rola dentro do card. */
+export type ProjectMore = {
+	/** texto do botão, ex.: "Ver mais sobre a Serena" */
+	label: string;
+	groups: Array<{
+		heading: string;
+		points?: string[];
+		stories?: ProjectStory[];
+	}>;
+	note?: string;
+};
+
+export type Project = {
+	id: string;
+	/** tipo do trabalho, em uma linha: "Quazz · sistema de loja" */
+	kind: string;
+	title: string;
+	summary: string;
+	stack: string[];
+	/** a primeira imagem é a principal; as outras entram como recortes por cima */
+	images: ProjectImage[];
+	link?: { label: string; href: string };
+	/** texto longo, aberto sob demanda (opcional) */
+	more?: ProjectMore;
+	/** números do projeto, exatamente como medidos */
+	metrics?: Array<{ value: string; label: string }>;
+};
+
+export type TimelineGroup = { heading: string; points: string[] };
 
 export type TimelineEvent = {
 	id: string;
-	/** nome da empresa ou curso; vira etiqueta de rotuladora quando `label` */
-	title: string;
-	label?: boolean;
+	/** `work` aparece em Experiência; `study` em Formação */
+	kind: "work" | "study";
+	place: string;
+	role: string;
 	body: string;
 	/** período, no formato do site: "jan/2025 até hoje" */
 	period: string;
-	/** coluna da grade (anos 2022 a 2026) */
-	col: string;
-	/** linha da grade */
-	row: number;
-	tilt: number;
-	/** `go` = em andamento (traço roxo); `pp` = papel branco; `cr` = papel creme */
-	variants: Array<"go" | "papel" | "cr">;
-	tape?: Tape;
-	/** barra de duração: n anos na grade, começa em `ini` e termina em `fim` (em anos) */
-	bar: { n: number; ini: number; fim: number };
+	/** detalhe que abre sob demanda */
+	details?: { summary: string; groups: TimelineGroup[] };
 };
 
 export type AiPanelId = "orq" | "brain" | "harn" | "tuc" | "ai";
@@ -69,3 +90,5 @@ export type ContactLink = {
 };
 
 export type NavItem = { label: string; href: string };
+
+export type BadgeRow = { label: string; value: string };
