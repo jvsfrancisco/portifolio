@@ -9,7 +9,7 @@ import { aiPanels } from "./panels";
  * Todos os painéis ficam montados e só o aberto aparece (CSS): assim a altura da seção é a do painel mais alto e a página não pula.
  */
 export function AiSection() {
-	const [open, setOpen] = useState<AiPanelId>(aiDefaultOpen);
+	const [open, setOpen] = useState<AiPanelId | null>(aiDefaultOpen);
 
 	return (
 		<section
@@ -34,7 +34,9 @@ export function AiSection() {
 							<button
 								type="button"
 								className="gv-b"
-								onClick={() => setOpen(spine.id)}
+								onClick={() =>
+									setOpen((current) => (current === spine.id ? null : spine.id))
+								}
 								aria-expanded={isOpen}
 							>
 								<span className="gv-n">{spine.n}</span>
