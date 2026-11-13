@@ -10,7 +10,7 @@ export const timeline: TimelineEvent[] = [
 		kind: "work",
 		place: "Quazz",
 		role: "minha consultoria em parceria",
-		body: "Desenvolvi o sistema da Serena Biquínis, no ar desde 19/09/2026, e os sites de Bem Trajados, Açaí de Lei, Tudo Aqui Marketing e Ostra Art Chinelos, de Rio das Ostras.",
+		body: "Desenvolvi o sistema da Serena Biquínis, no ar desde 19/09/2026, e os sites de Bem Trajados, Açaí de Lei, Tudo Aqui Marketing e Ostra Art, de Rio das Ostras.",
 		period: "jun/2026 até hoje",
 	},
 	{

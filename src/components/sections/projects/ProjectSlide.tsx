@@ -21,6 +21,7 @@ export function ProjectSlide({
 	active: boolean;
 }) {
 	const titleId = `proj-${project.id}`;
+	const links = project.links ?? (project.link ? [project.link] : []);
 	const slide = useRef<HTMLLIElement>(null);
 	const [stack, setStack] = useState<Record<string, number>>({});
 	const top = useRef(10);
@@ -146,16 +147,21 @@ export function ProjectSlide({
 					</button>
 				)}
 
-				{project.link && (
-					<a
-						className="ed-link"
-						href={project.link.href}
-						target="_blank"
-						rel="noopener"
-					>
-						{project.link.label}
-						<span aria-hidden="true"> ↗</span>
-					</a>
+				{links.length > 0 && (
+					<div className="ed-project-links">
+						{links.map((link) => (
+							<a
+								key={link.href}
+								className="ed-link"
+								href={link.href}
+								target="_blank"
+								rel="noopener"
+							>
+								{link.label}
+								<span aria-hidden="true"> ↗</span>
+							</a>
+						))}
+					</div>
 				)}
 			</div>
 

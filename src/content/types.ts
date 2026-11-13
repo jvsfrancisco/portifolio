@@ -46,6 +46,7 @@ export type Project = {
 	/** a primeira imagem é a principal; as outras entram como recortes por cima */
 	images: ProjectImage[];
 	link?: { label: string; href: string };
+	links?: Array<{ label: string; href: string }>;
 	/** texto longo, aberto sob demanda (opcional) */
 	more?: ProjectMore;
 	/** números do projeto, exatamente como medidos */

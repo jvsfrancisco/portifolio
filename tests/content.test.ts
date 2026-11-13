@@ -87,8 +87,11 @@ describe("conteúdo", () => {
 	});
 
 	it("os links de projeto são https", () => {
-		for (const p of projects)
-			if (p.link) expect(p.link.href, p.id).toMatch(/^https:\/\//);
+		for (const p of projects) {
+			const links = p.links ?? (p.link ? [p.link] : []);
+			for (const link of links)
+				expect(link.href, p.id).toMatch(/^https:\/\//);
+		}
 	});
 
 	it("mantém os fatos que não podem divergir", () => {

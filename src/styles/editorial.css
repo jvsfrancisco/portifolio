@@ -627,6 +627,15 @@
 	font-size: 13.5px;
 	line-height: 1.35;
 }
+.ed-project-links {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-top: 18px;
+}
+.ed-project-links .ed-link {
+	margin-top: 0;
+}
 .ed-link {
 	display: inline-flex;
 	align-items: center;

@@ -221,9 +221,9 @@ export const projects: Project[] = [
 	{
 		id: "ostra-art",
 		kind: "Quazz · site de cliente",
-		title: "Ostra Art Chinelos",
+		title: "Ostra Art",
 		summary:
-			"Site de uma loja de chinelos em Rio das Ostras, com catálogo de modelos e personalizador que envia a combinação escolhida pelo WhatsApp.",
+			"Duas frentes da mesma empresa em Rio das Ostras: site de chinelos com catálogo e personalizador pelo WhatsApp, e páginas de links para chinelos e armarinho.",
 		stack: ["React", "Vite", "Vercel"],
 		images: [
 			{
@@ -251,10 +251,16 @@ export const projects: Project[] = [
 				alt: "Personalizador da Ostra Art com um par de Havaianas Slim centralizado",
 			},
 		],
-		link: {
-			label: "Abrir ostraart.quazz.com.br",
-			href: "https://ostraart.quazz.com.br",
-		},
+		links: [
+			{
+				label: "Site de chinelos",
+				href: "https://ostraart.chinelos.quazz.com.br",
+			},
+			{
+				label: "Links do armarinho",
+				href: "https://ostraart.quazz.com.br",
+			},
+		],
 	},
 	{
 		id: "tudo-aqui",
