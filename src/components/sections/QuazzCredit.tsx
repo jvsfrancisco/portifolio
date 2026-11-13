@@ -5,7 +5,7 @@ const QUAZZ_URL = "https://www.quazz.com.br";
 /**
  * Crédito "feito por Quazz" com o easter egg dos sites da Quazz, na versão deste site:
  * o logo (símbolo e nome) é um cupom com linha tracejada em volta. Ao clicar, uma tesoura corre
- * pela linha, o recorte se solta e levanta, deixando o buraco no papel, e o site da Quazz abre.
+ * pela linha, o recorte se solta e levanta, deixando o buraco no papel. O site da Quazz abre em nova aba.
  * Com "reduzir movimento" ou tecla modificadora, o link abre direto.
  */
 export function QuazzCredit() {
@@ -18,13 +18,11 @@ export function QuazzCredit() {
 			"(prefers-reduced-motion: reduce)",
 		).matches;
 		if (!el || reduce || e.metaKey || e.ctrlKey || e.shiftKey) return;
-		e.preventDefault();
 		window.clearTimeout(timer.current);
 		el.classList.remove("is-cut");
 		window.requestAnimationFrame(() => el.classList.add("is-cut"));
 		timer.current = window.setTimeout(() => {
 			el.classList.remove("is-cut");
-			window.open(QUAZZ_URL, "_blank", "noopener");
 		}, 2300);
 	};
 
