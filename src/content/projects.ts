@@ -219,6 +219,44 @@ export const projects: Project[] = [
 		},
 	},
 	{
+		id: "ostra-art",
+		kind: "Quazz · site de cliente",
+		title: "Ostra Art Chinelos",
+		summary:
+			"Site de uma loja de chinelos em Rio das Ostras, com catálogo de modelos e personalizador que envia a combinação escolhida pelo WhatsApp.",
+		stack: ["React", "Vite", "Vercel"],
+		images: [
+			{
+				src: "/img/ostraart-desktop.jpg",
+				width: 1200,
+				height: 720,
+				alt: "Site da Ostra Art no computador, com o título O seu par. A sua cara. e um par de Havaianas",
+			},
+			{
+				src: "/img/ostraart-links.jpg",
+				width: 390,
+				height: 680,
+				alt: "Página de links da Ostra Art no celular, com os canais da loja e acesso ao mapa",
+			},
+			{
+				src: "/img/ostraart-catalogo.jpg",
+				width: 1200,
+				height: 720,
+				alt: "Carrossel de pingentes da Ostra Art na seção Escolha o seu enfeite",
+			},
+			{
+				src: "/img/ostraart-personalizador.jpg",
+				width: 1200,
+				height: 720,
+				alt: "Personalizador da Ostra Art com um par de Havaianas Slim centralizado",
+			},
+		],
+		link: {
+			label: "Abrir ostraart.quazz.com.br",
+			href: "https://ostraart.quazz.com.br",
+		},
+	},
+	{
 		id: "tudo-aqui",
 		kind: "Quazz · site de cliente",
 		title: "Tudo Aqui Marketing",
