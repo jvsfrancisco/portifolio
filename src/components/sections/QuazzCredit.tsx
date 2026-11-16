@@ -5,12 +5,11 @@ const QUAZZ_URL = "https://www.quazz.com.br";
 /**
  * Crédito "feito por Quazz" com o easter egg dos sites da Quazz, na versão deste site:
  * o logo (símbolo e nome) é um cupom com linha tracejada em volta. Ao clicar, uma tesoura corre
- * pela linha, o recorte se solta e levanta, deixando o buraco no papel. O site da Quazz abre em nova aba.
+ * pela linha, o recorte se solta e levanta, deixando o buraco no papel. Ao terminar, a Quazz abre em nova aba.
  * Com "reduzir movimento" ou tecla modificadora, o link abre direto.
  */
 export function QuazzCredit() {
 	const ref = useRef<HTMLAnchorElement>(null);
-	const timer = useRef(0);
 
 	const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
 		const el = ref.current;
@@ -18,12 +17,9 @@ export function QuazzCredit() {
 			"(prefers-reduced-motion: reduce)",
 		).matches;
 		if (!el || reduce || e.metaKey || e.ctrlKey || e.shiftKey) return;
-		window.clearTimeout(timer.current);
+		e.preventDefault();
 		el.classList.remove("is-cut");
 		window.requestAnimationFrame(() => el.classList.add("is-cut"));
-		timer.current = window.setTimeout(() => {
-			el.classList.remove("is-cut");
-		}, 2300);
 	};
 
 	return (
@@ -34,6 +30,11 @@ export function QuazzCredit() {
 				target="_blank"
 				rel="noopener"
 				onClick={onClick}
+				onAnimationEnd={(e) => {
+					if (e.animationName !== "qz-piece") return;
+					ref.current?.classList.remove("is-cut");
+					window.open(QUAZZ_URL, "_blank", "noopener");
+				}}
 				title="Recorta e cola"
 				className="quazz-easter"
 			>
