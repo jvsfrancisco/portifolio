@@ -2,7 +2,7 @@ import type { Project } from "./types";
 
 /**
  * Projetos do carrossel, na ordem em que aparecem.
- * Para acrescentar um (ex.: Feiras Cariocas), inclua uma entrada aqui com imagens reais em public/img.
+ * Para acrescentar um, inclua uma entrada aqui com imagens reais em public/img.
  * Não inclua entrada sem material: nada é inventado.
  */
 export const projects: Project[] = [
@@ -101,6 +101,82 @@ export const projects: Project[] = [
 			],
 			note: "Sistema interno da loja, sem link público. As telas aparecem aqui com autorização da dona.",
 		},
+	},
+	{
+		id: "olha-a-feira",
+		kind: "Projeto pessoal · app",
+		title: "Olha a Feira",
+		summary:
+			"Mapa colaborativo das feiras livres do Rio. A Prefeitura publica a lista num PDF, sem mapa e sem aviso quando a feira muda. O app põe as 160 feiras no mapa, cada uma como um trecho de rua, e deixa quem está na feira confirmar que ela está de pé.",
+		stack: [
+			"React 19",
+			"Vite",
+			"MapLibre GL",
+			"Supabase",
+			"Cloudflare Turnstile",
+		],
+		images: [
+			{
+				src: "/img/olhafeira-desktop.jpg",
+				width: 1200,
+				height: 750,
+				alt: "Página inicial do Olha a Feira no computador: o título Onde tem feira hoje, com um tomate desenhado e pinos dos dias da semana",
+			},
+			{
+				src: "/img/olhafeira-mobile.jpg",
+				width: 390,
+				height: 760,
+				alt: "App do Olha a Feira no celular: busca por bairro, filtro por dia e os cartões das feiras por perto",
+			},
+			{
+				src: "/img/olhafeira-mapa.jpg",
+				width: 1200,
+				height: 750,
+				alt: "Mapa do Olha a Feira com as feiras do Rio agrupadas por região e os filtros de dia da semana no topo",
+			},
+			{
+				src: "/img/olhafeira-trecho.jpg",
+				width: 688,
+				height: 482,
+				alt: "Mapa da feira da Rua Mearim, no Grajaú, desenhada como uma linha vermelha que passa por três cruzamentos",
+			},
+			{
+				src: "/img/olhafeira-tomate.jpg",
+				width: 340,
+				height: 340,
+				alt: "Recorte do tomate com olhos, mascote do Olha a Feira",
+			},
+		],
+		metrics: [
+			{
+				value: "160 feiras",
+				label: "da lista oficial da Prefeitura do Rio no mapa",
+			},
+		],
+		more: {
+			label: "Ver mais sobre o Olha a Feira",
+			groups: [
+				{
+					heading: "O que o app faz",
+					points: [
+						"Lista as feiras por dia, com horário e bairro.",
+						"Mostra cada feira no mapa como trecho de rua, não como um ponto.",
+						"Quem está perto e dentro do horário responde Sim ou Não para Tem feira aqui agora?, e pode mandar foto.",
+						"A comunidade propõe trechos novos e sugere feiras que faltam na lista.",
+					],
+				},
+				{
+					heading: "Por dentro",
+					points: [
+						"Supabase com Postgres, login anônimo, RPCs e uma Edge Function para as fotos.",
+						"Captcha do Cloudflare Turnstile antes do login anônimo: sem o token, o Supabase recusa a sessão.",
+						"As confirmações não guardam coordenadas nem IP, e a localização nunca fica ligada a quem enviou.",
+						"Fotos de aparelhos novos passam por revisão antes de aparecer.",
+					],
+				},
+			],
+		},
+		link: { label: "Abrir olhafeira.tech", href: "https://olhafeira.tech" },
 	},
 	{
 		id: "quazz",
